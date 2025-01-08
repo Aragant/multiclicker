@@ -1,10 +1,18 @@
-import Clicker from "./clicker";
+'use client';
 
-export default function Home() {
+import React, { useEffect } from "react";
+
+const App = () => {
+  useEffect(() => {
+    // This code will only run on the client side
+    console.log(document.title);
+  }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <Clicker></Clicker>
+    <div>
+      Welcome to oss !
     </div>
   );
-}
+};
+
+export default App;
