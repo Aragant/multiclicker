@@ -8,7 +8,7 @@ import './navbar.css';
 
 
 const links = [
-    { name: 'Home', href: '/friends', icon: UserGroupIcon },
+    { name: 'Friend', href: '/friends', icon: UserGroupIcon },
     {
         name: 'Game',
         href: '/game',
