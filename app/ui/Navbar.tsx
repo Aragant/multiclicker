@@ -8,13 +8,13 @@ import './navbar.css';
 
 
 const links = [
-    { name: 'Home', href: '/dashboard', icon: UserCircleIcon },
+    { name: 'Home', href: '/friends', icon: UserGroupIcon },
     {
-        name: 'Invoices',
-        href: '/dashboard/invoices',
+        name: 'Game',
+        href: '/game',
         icon: CubeIcon,
     },
-    { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+    { name: 'login', href: '/login', icon: UserCircleIcon },
 ];
 
 export default function Navbar() {
