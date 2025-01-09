@@ -6,7 +6,7 @@ export default function Clicker() {
     const [count, setCount] = useState(0);
 
     return (
-        <div className="flex flex-col items-center gap-8 h-max">
+        <div className="flex flex-col items-center justify-center h-full gap-8">
             <p className="text-4xl">{count}</p>
             <button
              onClick={() => setCount(count + 1)}
