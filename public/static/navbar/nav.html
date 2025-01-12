@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil - Navbar</title>
+    <link rel="stylesheet" href="nav.css">
+</head>
+<body>
+    <div class="navbar-container">
+    <button id="menuButton">&#8801;</button>
+    </div>
+    <div id="navScroll" class="hidden">
+        <button class="login">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6m0 14c-2.03 0-4.43-.82-6.14-2.88a9.95 9.95 0 0 1 12.28 0C16.43 19.18 14.03 20 12 20"/></svg>
+        </button>
+        <h2 class="player-name">{p-login}</h2>
+        <h2 class="guild-name">{guild-name}</h2>
+        <h1>Score Global : {points}</h1>
+        <div class="friend-search-container">
+            <input id="friendSearch" type="search" placeholder="Entrez un pseudo..."/>
+            <button class="invite">&#x1F584;</button>
+            
+            <button id="filterButton" class="filter-button" data-bs-toggle="collapse" data-bs-target="#filter-collapse">
+                <svg xmlns="http://www.w3.org/200/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+                  <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5z"/>
+                </svg>
+              </button>
+              <div class="collapse" id="filter-collapse">
+                <div class="filter-options">
+                <div class="form-group">
+                    <h4>Filtrer tous les joueurs :</h4>
+                    <p></p>
+                  <label for="country">Pays :</label>
+                  <select id="country" class="form-control">
+                    <option value="all">Tous</option>
+                    <option value="france">France</option>
+                    <option value="espagne">Espagne</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="points">Nombre de points :</label>
+                  <input type="range" min="0" max="1000" value="500" id="pts">
+                  <output for="points" id="points-output">500</output>
+                </div>
+                </div>
+              </div>
+        </div>
+        <div class="friend-list">
+            <div class="friend">
+              <span class="name">Manon</span>
+              <span class="score">{points}</span>
+              <span class="flag">{country}</span>
+              <span class="guild">{guild}</span>
+            </div>
+            <div class="friend">
+              <span class="name">Hauretax</a>
+              <span class="score">{points}</span>
+              <span class="flag">{country}</span>
+              <span class="guild">{guild}</span>
+            </div>
+            </div>
+            <div class="friend">
+                <span class="name">Bylan</span>
+                <span class="score">{points}</span>
+                <span class="flag">{country}</span>
+                <span class="guild">{guild}</span>
+              </div>
+              <div class="friend">
+                <span class="name">LuluP</a>
+                <span class="score">{points}</span>
+                <span class="flag">{country}</span>
+                <span class="guild">{guild}</span>
+              </div>
+              </div>  
+    </div>
+    <script src="nav.js"></script>
+    
+</body>
+</html>

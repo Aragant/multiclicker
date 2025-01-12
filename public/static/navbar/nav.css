@@ -1,0 +1,149 @@
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+#navScroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #eee;
+    box-shadow: 0 0 10px 1px;
+    padding: 20px;
+    transform: translateX(-100%); 
+    transition: transform 0.3s ease-in-out; 
+}
+
+#navScroll.show {
+    transform: translateX(0); 
+}
+
+.navbar-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#menuButton {
+    font-size: 35px;
+    color: #333;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.login{
+    font-size: 30px;
+    background: transparent;
+    border-radius: 30px;
+    border: 2px solid;
+    transition: all 0.5s;
+    color: #a5a4a4;
+    border: 2px solid;
+    content:'';
+}
+
+.login:hover{
+    transform: scale(1.2);
+    background-color: #f3b33b;
+    border: 2.5px solid;
+    color: #eee;
+    border: 2px solid #eee;
+}
+
+.friend-search-container{
+    margin: 20px;
+}
+
+#friendSearch{
+    outline: none;
+    border: 1px solid #eee;
+    border-radius: 30px;
+    height: 35px;
+    width: 155px;
+    text-align: center;
+}
+
+.invite{
+    font-size: 20px;
+    border-radius: 50px;
+    height: 30px;
+}
+
+.filter-button{
+border-radius: 5px;
+padding: 5px 10px;
+cursor: pointer;
+transition: all 0.3s ease-in-out;
+}
+
+.filter-button.collapsed{
+background-color: #f1f1f1;
+}
+
+.filter-button svg{
+margin-right: 5px;
+fill: #333;
+transition: all 0.3s ease-in-out;
+}
+
+.filter-button:hover svg{
+fill: #f3b33b;
+}
+
+.filter-options{
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 5px;
+background-color: #fff;
+margin-top: 10px;
+display: none;
+}
+
+.form-group{
+margin-bottom: 15px;
+}
+
+.form-control{
+border-radius: 3px;
+}
+
+.friend-list{
+    display: inline-block;
+    justify-content: flex-start;
+    text-decoration: none;
+}
+
+.friend{
+    background-color: #eee;
+    padding: 10px;
+    color: #000;
+    font-weight: 700;
+    font-style: italic;
+}
+.friend:hover{
+    background-color: #d1d1d1;
+}
+
+.flag{
+    margin-right: 5px;
+}
+  
+.score{
+    margin-left: 10px;
+    font-weight: bold;
+}
+  
+.guild{
+    margin-left: 10px;
+    color: #888;
+}
