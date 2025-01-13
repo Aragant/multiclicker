@@ -2,6 +2,7 @@
 
 import { useState, useContext } from "react";
 import { WsContext } from "../context/wsContext";
+import BigClick from "../ui/game/BigClick";
 
 
 export default function Clicker() {
@@ -10,28 +11,16 @@ export default function Clicker() {
 
     websocket!.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data);
-        setCount(data.sumClick);
+        setCount(data.sumScore);
     };
 
-    
-    function bigClick() {
-        console.log('bigclick');
-        setCount(count + 1);
-
-        const event = {
-            type: 'click',
-        }
-
-        websocket!.send(JSON.stringify(event));
-    }
 
     return (
         <div className="flex flex-col items-center justify-center h-full gap-8">
+
+
             <p className="text-4xl">{count}</p>
-            <button
-             onClick={bigClick}
-             className="text-4xl text-black bg-orange-200 rounded-lg p-4 uppercase">click</button>
+            <BigClick />
         </div>
     );
 }
