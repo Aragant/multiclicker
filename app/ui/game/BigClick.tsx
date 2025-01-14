@@ -1,9 +1,8 @@
-import { WsContext } from "@/app/context/wsContext";
-import { useContext } from "react";
+import { useWsContext } from "@/app/context/useWsContext";
 
 
 export default function BigClick() {
-    const websocket = useContext(WsContext);
+    const {websocket} = useWsContext();
     
     function bigClick() {
         const event = {
