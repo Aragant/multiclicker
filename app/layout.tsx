@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./ui/Navbar";
-import { WsProvider } from "./context/wsContext";
+import { WebSocketProvider } from "./context/webSocketProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,14 +27,14 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <WsProvider>
+      <WebSocketProvider>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col`}
         >
           {children}
           <Navbar />
         </body>
-      </WsProvider>
+      </WebSocketProvider>
     </html>
   );
 }

@@ -1,7 +1,7 @@
-import { useWsContext } from "@/app/context/useWsContext";
+import { useWebSocket } from "@/app/context/useWebSocket";
 
 export default function SumScore() {
-    const {sumScore} = useWsContext();
+    const {sumScore} = useWebSocket();
     
 
     

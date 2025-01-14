@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { redirect } from 'next/navigation'
-import { useWsContext } from "../context/useWsContext";
+import { useWebSocket } from "../context/useWebSocket";
 import { EventType } from "../context/eventType";
 
 
 export default function Login() {
     const [username, setUsername] = useState('');
-    const {websocket} = useWsContext();
+    const {websocket} = useWebSocket();
 
 
     const login = async () => {

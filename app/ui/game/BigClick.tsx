@@ -1,9 +1,9 @@
 import { EventType } from "@/app/context/eventType";
-import { useWsContext } from "@/app/context/useWsContext";
+import { useWebSocket } from "@/app/context/useWebSocket";
 
 
 export default function BigClick() {
-    const {websocket} = useWsContext();
+    const {websocket} = useWebSocket();
     
     function bigClick() {
         const event = {
