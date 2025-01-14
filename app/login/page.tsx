@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useContext } from "react";
-import { WsContext } from "../context/wsContext";
+import { useState } from "react";
 import { redirect } from 'next/navigation'
+import { useWsContext } from "../context/useWsContext";
 
 
 export default function Login() {
     const [username, setUsername] = useState('');
-    const websocket = useContext(WsContext);
+    const {websocket} = useWsContext();
 
 
     const login = async () => {
@@ -18,11 +18,7 @@ export default function Login() {
             type: 'login',
         }));
 
-        websocket!.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            console.log(data);
-            redirect('/game');
-        };
+        redirect('/game');
     }
 
 
