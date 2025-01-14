@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { redirect } from 'next/navigation'
 import { useWsContext } from "../context/useWsContext";
+import { EventType } from "../context/eventType";
 
 
 export default function Login() {
@@ -15,7 +16,7 @@ export default function Login() {
         
         websocket?.send(JSON.stringify({
             username: username,
-            type: 'login',
+            type: EventType.LOGIN,
         }));
 
         redirect('/game');

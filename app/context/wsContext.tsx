@@ -1,5 +1,6 @@
 'use client';
 import { createContext, useEffect, useState } from "react";
+import { EventType } from "./eventType";
 
 type WsContextType = {
     websocket: WebSocket | null;
@@ -33,7 +34,7 @@ export const WsProvider = ({ children }: { children: React.ReactNode }) => {
 
     const handleMessage = (event: MessageEvent) => {
         const data = JSON.parse(event.data);
-        if (data.type === "clicked") {
+        if (data.type === EventType.CLICKED) {
             setSumScore(data.sumScore);
         }
         console.log("Message reçu : ", data);

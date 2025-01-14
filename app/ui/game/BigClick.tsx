@@ -1,3 +1,4 @@
+import { EventType } from "@/app/context/eventType";
 import { useWsContext } from "@/app/context/useWsContext";
 
 
@@ -6,7 +7,7 @@ export default function BigClick() {
     
     function bigClick() {
         const event = {
-            type: 'click',
+            type: EventType.CLICK,
         }
 
         websocket!.send(JSON.stringify(event));
