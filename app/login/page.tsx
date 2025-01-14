@@ -13,7 +13,7 @@ export default function Login() {
     const login = async () => {
         console.log('connected', websocket?.readyState);
         
-        websocket!.send(JSON.stringify({
+        websocket?.send(JSON.stringify({
             username: username,
             type: 'login',
         }));
