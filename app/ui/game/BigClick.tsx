@@ -3,14 +3,14 @@ import { useWebSocket } from "@/app/context/useWebSocket";
 
 
 export default function BigClick() {
-    const {websocket} = useWebSocket();
+    const websocket = useWebSocket();
     
     function bigClick() {
         const event = {
             type: EventType.CLICK,
         }
 
-        websocket!.send(JSON.stringify(event));
+        websocket?.send(JSON.stringify(event));
     }
 
     return (

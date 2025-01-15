@@ -8,7 +8,7 @@ import { EventType } from "../context/eventType";
 
 export default function Login() {
     const [username, setUsername] = useState('');
-    const {websocket} = useWebSocket();
+    const websocket = useWebSocket();
 
 
     const login = async () => {

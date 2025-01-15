@@ -1,6 +1,6 @@
 // useWebSocket.ts
 import { useEffect } from "react";
-import { EventType } from "./eventType";
+import { EventType } from "../eventType";
 import { MulticlickerAction } from "@/app/context/multiclicker/multiclickerReducer";
 
 export const useHandleWebSocketEvent = (websocket: WebSocket | null, dispatch: React.Dispatch<MulticlickerAction>) => {
