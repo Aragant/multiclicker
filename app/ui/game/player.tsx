@@ -1,9 +1,21 @@
+import { usePlayerScore } from "@/app/context/usePlayerScore";
 
+export default function Player() {
+    const playerScore = usePlayerScore();
 
-export default function Player(name: string, sumClick: number) {
     return (
         <div className="player flex flex-row">
-            <p>{name}</p> : <p>{sumClick}</p>
+            <ul>
+                {
+                    playerScore.map((player) => {
+                        return (
+                            <li key={player.username}>
+                                {player.username} : {player.sumScore}
+                            </li>
+                        );
+                    })
+                }
+            </ul>
         </div>
     );
 }

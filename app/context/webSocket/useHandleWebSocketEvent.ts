@@ -27,9 +27,10 @@ export const useHandleWebSocketEvent = (websocket: WebSocket | null, dispatch: R
 
 const handleMessage = (event: MessageEvent, dispatch: React.Dispatch<MulticlickerAction>) => {
     const data = JSON.parse(event.data);
-
     if (data.type === EventType.CLICKED) {
+        console.log("hadle message");
         dispatch({ type: 'SET_SUM_SCORE', payload: data.sumScore });
+        dispatch({ type: 'SET_PLAYER_SCORE', payload: data.player });
     }
     console.log("Message reçu : ", data);
 };
