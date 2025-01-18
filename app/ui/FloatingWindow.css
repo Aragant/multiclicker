@@ -1,0 +1,37 @@
+.floating-window {
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 1000;
+  }
+  
+  .floating-window-header {
+    background-color: #007bff;
+    color: white;
+    padding: 8px;
+    cursor: grab;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .floating-window-header:active {
+    cursor: grabbing;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .floating-window-content {
+    padding: 16px;
+  }
+  

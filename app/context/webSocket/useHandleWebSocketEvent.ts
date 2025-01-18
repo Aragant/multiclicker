@@ -15,7 +15,7 @@ export const useHandleWebSocketEvent = (websocket: WebSocket | null, dispatch: R
         };
 
         websocket.onclose = () => console.log("WebSocket fermé.");
-        websocket.onerror = (error) => console.error("WebSocket erreur :", error); 
+        websocket.onerror = (error) => console.error("WebSocket erreur :", error);
 
         return () => {
             websocket.close();
@@ -34,6 +34,13 @@ const handleMessage = (event: MessageEvent, dispatch: React.Dispatch<Multiclicke
     if (data.type === EventType.GET_GAME_INFO) {
         console.log(data);
         dispatch({ type: 'GET_GAME_INFO', payload: data.game });
+    }
+    if (data.type === EventType.SET_CLANS) {
+        console.log('teasd', data);
+        // dispatch({ type: 'SET_CLIENT_CLAN', payload: data.player.clan });
+    }
+    if (data.type === EventType.JOIN_CLAN) {
+        dispatch({ type: 'SET_CLIENT_CLAN', payload: data.player.clan });
     }
     console.log("Message reçu : ", data);
 };
