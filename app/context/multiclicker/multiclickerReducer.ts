@@ -15,6 +15,7 @@ export type MulticlickerState = {
 export type MulticlickerAction =
     | { type: 'SET_SUM_SCORE'; payload: number }
     | { type: 'SET_PLAYER_SCORE'; payload: PlayerScore }
+    | { type: 'GET_GAME_INFO'; payload: MulticlickerState }
     // Ajoute d'autres actions si nécessaire.
 
 export const initialState: MulticlickerState = {
@@ -31,12 +32,18 @@ export const multiclickerReducer = (state: MulticlickerState, action: Multiclick
                 sumScore: action.payload,
             };
         case 'SET_PLAYER_SCORE':
-            console.log("SET_PLAYER_SCORE", state);
             setPlayerScore(action.payload, state);
             return {
                 ...state,
                 playerScore: [...state.playerScore],
             }
+
+        case 'GET_GAME_INFO':
+            return {
+                ...state,
+                sumScore: action.payload.sumScore,
+                playerScore: action.payload.playerScore,
+            };
         default:
             return state;
     }
