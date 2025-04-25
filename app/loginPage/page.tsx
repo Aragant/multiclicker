@@ -1,85 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import Card from "../components/card";
+import LoginForm from "./components/LoginForm";
+import "./login.css";
+import { useState, useEffect, useRef } from "react"
 
 export default function LoginPage() {
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  const handleSubmitLoginForm = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setError("");
-    setSuccess("");
-
-    const formData = new FormData(event.currentTarget);
-    console.log(formData);
-    const username = formData.get("username") as string;
-    const password = formData.get("password") as string;
-
-    const formDataToSend = new URLSearchParams();
-    formDataToSend.append("username", username);
-    formDataToSend.append("password", password);
-
-    try {
-      const response = await fetch("http://localhost:9999/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formDataToSend.toString(),
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(errorData.detail || "Login failed");
-      } else {
-        const data = await response.json();
-        console.log(data);
-        setSuccess("Login successful!");
-      }
-    } catch (err) {
-      setError("An error occurred while logging in" + err);
-    }
-
-    
+  const [isLoading, setIsLoading] = useState(false)
+  const handleLoginSuccess = () => {
+    window.location.href = "/game";
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-4xl font-bold mb-4">Login Page</h1>
-      <form onSubmit={handleSubmitLoginForm} className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2 text-black">
-          <input type="text" placeholder="Username" name="username" />
-          <input type="text" placeholder="Password" name="password" />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Login
-        </button>
-      </form>
-
-      {error && (
-        <p
+      <Card className="border-none shadow-xl overflow-hidden gnassss">
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-indigo-500/10"
           style={{
-            color: "red",
+            background: isLoading
+              ? "linear-gradient(to right, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2))"
+              : "linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1))",
+            transition: "background 0.5s ease",
           }}
-        >
-          {error}
-        </p>
-      )}
-
-      {success && (
-        <p
-          style={{
-            color: "green",
-          }}
-        >
-          {success}
-        </p>
-      )}
+        />
+        <LoginForm onSuccess={handleLoginSuccess} />
+      </Card>
     </div>
   );
 }

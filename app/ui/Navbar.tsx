@@ -14,7 +14,7 @@ const links = [
         href: '/game',
         icon: CubeIcon,
     },
-    { name: 'login', href: '/login', icon: UserCircleIcon },
+    { name: 'login', href: '/loginPage', icon: UserCircleIcon },
 ];
 
 export default function Navbar() {
