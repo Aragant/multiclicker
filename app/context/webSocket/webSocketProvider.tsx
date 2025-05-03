@@ -7,31 +7,61 @@ import { WebSocketContext } from "./webSocketConstext";
 
 
 
-export const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
+interface WebSocketProviderProps {
+    children: React.ReactNode;
+}
+
+export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     const [state, dispatch] = useReducer(multiclickerReducer, initialState);
 
     const [websocket, setWebSocket] = useState<WebSocket | null>(null);
 
     useEffect(() => {
-        // Initialisation du WebSocket à l'intérieur de useEffect
+
+        if (!state.playerName) {
+            if (websocket) {
+                websocket.close();
+                setWebSocket(null);
+            }
+            return;
+        }
+
         const webSocket = new WebSocket('ws://localhost:8001');
         setWebSocket(webSocket);
 
+        //do connection to gamer name  we can send an key to the server to identify the player later
+        webSocket.onopen = () => {
+            console.log("WebSocket connected");
+            const loginEvent = {
+                type: "login",
+                username: state.playerName,
+            };
+            webSocket.send(JSON.stringify(loginEvent));
+        };
+
+
+        webSocket.onclose = () => {
+            console.log("WebSocket disconnected");
+        };
+
+        webSocket.onerror = (error) => {
+            console.error("WebSocket error:", error);
+        };
+
         return () => {
-            // Ferme la connexion lorsque le composant est démonté
             if (webSocket) {
                 webSocket.close();
             }
         };
-        
-    }, []);
+
+    }, [!state.playerName]);
 
     useHandleWebSocketEvent(websocket, dispatch);
 
 
 
     return (
-        <WebSocketContext.Provider value={{websocket, state, dispatch }}>
+        <WebSocketContext.Provider value={{ websocket, state, dispatch }}>
             {children}
         </WebSocketContext.Provider>
     );

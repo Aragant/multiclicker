@@ -9,18 +9,21 @@ type PlayerScore = {
 export type MulticlickerState = {
     sumScore: number;
     playerScore: PlayerScore[];
+    playerName?: string;
     // Tu peux ajouter d'autres propriétés à l'état ici si nécessaire.
 };
 
 export type MulticlickerAction =
     | { type: 'SET_SUM_SCORE'; payload: number }
     | { type: 'SET_PLAYER_SCORE'; payload: PlayerScore }
-    | { type: 'GET_GAME_INFO'; payload: MulticlickerState }
-    // Ajoute d'autres actions si nécessaire.
+    | { type: 'SET_PLAYER_NAME'; payload: string }
+    | { type: 'SET_GAME_INFO'; payload: MulticlickerState }
+// Ajoute d'autres actions si nécessaire.
 
 export const initialState: MulticlickerState = {
     sumScore: 0,
     playerScore: [],
+    playerName: "duo",
 };
 
 
@@ -37,8 +40,12 @@ export const multiclickerReducer = (state: MulticlickerState, action: Multiclick
                 ...state,
                 playerScore: [...state.playerScore],
             }
-
-        case 'GET_GAME_INFO':
+        case 'SET_PLAYER_NAME':
+            return {
+                ...state,
+                playerName: action.payload,
+            }
+        case 'SET_GAME_INFO':
             return {
                 ...state,
                 sumScore: action.payload.sumScore,
@@ -50,7 +57,7 @@ export const multiclickerReducer = (state: MulticlickerState, action: Multiclick
 };
 
 
-function setPlayerScore(playerScore: PlayerScore, state: MulticlickerState) {                             
+function setPlayerScore(playerScore: PlayerScore, state: MulticlickerState) {
     const index = state.playerScore.findIndex((p) => p.username === playerScore.username);
     if (index === -1) {
         state.playerScore.push(playerScore);

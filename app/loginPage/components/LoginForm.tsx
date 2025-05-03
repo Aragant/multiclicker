@@ -23,16 +23,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         event.preventDefault();
         setError("");
         setIsLoading(true)
-
         const formData = new FormData(event.currentTarget);
         const username = formData.get("username") as string;
         const password = formData.get("password") as string;
 
         const result = await login(username, password);
-
+        console.log(result)
+        
         if (result.success) {
+            
             onSuccess();
         } else {
+            setIsLoading(false)
             setError(result.message);
         }
     };
@@ -114,6 +116,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                                 </a>
                             </div>
                         </div>
+
+                        {error && (
+                            <div className="text-red-500">
+                                {error}
+                            </div>
+                        )}
 
                         <div className="stagger-item">
                             <button

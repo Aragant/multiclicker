@@ -5,10 +5,11 @@ export function useSumScore() {
     const webSocketContext = useContext(WebSocketContext);
 
     if (!webSocketContext) {
-        throw new Error("WsContext must be used within a WsProvider");
+        console.warn("WebSocketContext is unavailable. Returning default player score.");
+        return 0;
     }
 
     const { sumScore } = webSocketContext.state;
 
-    return sumScore;
+    return sumScore ?? 0;
 }
