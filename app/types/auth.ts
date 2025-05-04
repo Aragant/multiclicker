@@ -14,3 +14,10 @@ export interface LoginErrorDetail {
 export interface LoginErrorResponse {
     detail: LoginErrorDetail[];
 }
+
+export interface LoginResponse {
+    success: boolean;
+    message: string;
+    user:{ guild_id: string, id: string };
+  }
+  

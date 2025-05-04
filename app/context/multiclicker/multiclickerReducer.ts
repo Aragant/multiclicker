@@ -9,7 +9,6 @@ type PlayerScore = {
 export type MulticlickerState = {
     sumScore: number;
     playerScore: PlayerScore[];
-    playerName?: string;
     // Tu peux ajouter d'autres propriétés à l'état ici si nécessaire.
 };
 
@@ -23,7 +22,6 @@ export type MulticlickerAction =
 export const initialState: MulticlickerState = {
     sumScore: 0,
     playerScore: [],
-    playerName: "duo",
 };
 
 
@@ -42,8 +40,7 @@ export const multiclickerReducer = (state: MulticlickerState, action: Multiclick
             }
         case 'SET_PLAYER_NAME':
             return {
-                ...state,
-                playerName: action.payload,
+                ...state
             }
         case 'SET_GAME_INFO':
             return {
