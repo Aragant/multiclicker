@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { login } from "../../services/authService";
 import { Lock, Mail } from "lucide-react";
 import Spinner from "@/app/components/Spinner";
-import PlayerStorage from "@/app/utils/PlayerStorage";
+import Storage from "@/app/utils/Storage";
 
 interface LoginFormProps {
     onSuccess: () => void;
@@ -29,10 +29,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         const password = formData.get("password") as string;
 
         const result = await login(username, password);
-        console.log(result)
 
         if (result.success) {
-            PlayerStorage.save(result.user.id, result.user.guild_id);
+            Storage.save(result.user.id, result.user.guild_id);
             onSuccess();
         } else {
             setIsLoading(false)

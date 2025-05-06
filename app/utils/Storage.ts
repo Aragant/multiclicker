@@ -1,6 +1,6 @@
-class PlayerStorage {
-  private static playerIdKey = "player_id";
-  private static guildIdKey = "guild_id";
+class Storage {
+  static playerIdKey = "player_id";
+  static guildIdKey = "guild_id";
 
   static save(username: string, guild_id: string): void {
     try {
@@ -11,11 +11,20 @@ class PlayerStorage {
     }
   }
 
-  static get(): string | null {
+  static getGuildId(): string | null {
+    try {
+      return localStorage.getItem(this.guildIdKey);
+    } catch (error) {
+      console.error("Failed to get guild ID:", error);
+      return null;
+    }
+  }
+  
+  static getPlayerId(): string | null {
     try {
       return localStorage.getItem(this.playerIdKey);
     } catch (error) {
-      console.error("Failed to get player name:", error);
+      console.error("Failed to get player ID:", error);
       return null;
     }
   }
@@ -23,10 +32,11 @@ class PlayerStorage {
   static clear(): void {
     try {
       localStorage.removeItem(this.playerIdKey);
+      localStorage.removeItem(this.guildIdKey);
     } catch (error) {
       console.error("Failed to clear player name:", error);
     }
   }
 }
 
-export default PlayerStorage;
+export default Storage;

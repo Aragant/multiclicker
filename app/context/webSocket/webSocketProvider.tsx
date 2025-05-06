@@ -4,7 +4,7 @@ import { useEffect, useReducer, useState } from "react";
 import { useHandleWebSocketEvent } from "./useHandleWebSocketEvent";
 import { multiclickerReducer, initialState } from "@/app/context/multiclicker/multiclickerReducer";
 import { WebSocketContext } from "./webSocketConstext";
-import PlayerStorage from "@/app/utils/PlayerStorage";
+import Storage from "@/app/utils/Storage";
 
 
 
@@ -21,7 +21,7 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     //pas sur de l interet d un useEffect ici vus que l on est sencer arriver apre sun chanement de page .
     useEffect(() => {
 
-        const playerName = PlayerStorage.get();
+        const playerName = Storage.getPlayerId();
         if (!playerName) {
             if (websocket) {
                 websocket.close();
