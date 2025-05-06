@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { login } from "../../services/authService";
 import { Lock, Mail } from "lucide-react";
 import Spinner from "@/app/components/Spinner";
+import Storage from "@/app/utils/Storage";
 
 interface LoginFormProps {
     onSuccess: () => void;
@@ -23,7 +24,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         event.preventDefault();
         setError("");
         setIsLoading(true)
-
         const formData = new FormData(event.currentTarget);
         const username = formData.get("username") as string;
         const password = formData.get("password") as string;
@@ -31,8 +31,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         const result = await login(username, password);
 
         if (result.success) {
+            Storage.save(result.user.id, result.user.guild_id);
             onSuccess();
         } else {
+            setIsLoading(false)
             setError(result.message);
         }
     };
@@ -114,6 +116,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                                 </a>
                             </div>
                         </div>
+
+                        {error && (
+                            <div className="text-red-500">
+                                {error}
+                            </div>
+                        )}
 
                         <div className="stagger-item">
                             <button

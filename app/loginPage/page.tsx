@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react"
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
+  
   const handleLoginSuccess = () => {
     window.location.href = "/game";
   };

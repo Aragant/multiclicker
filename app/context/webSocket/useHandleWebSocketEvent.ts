@@ -31,19 +31,10 @@ const handleMessage = (
       dispatch({ type: "SET_SUM_SCORE", payload: data.sumScore });
       dispatch({ type: "SET_PLAYER_SCORE", payload: data.player });
       break;
-    case EventType.GET_GAME_INFO:
-      dispatch({ type: "GET_GAME_INFO", payload: data.game });
+    case EventType.SET_GAME_INFO:
+      dispatch({ type: "SET_GAME_INFO", payload: data.game });
 
       break;
-  }
-
-  if (data.type === EventType.CLICKED) {
-    dispatch({ type: "SET_SUM_SCORE", payload: data.sumScore });
-    dispatch({ type: "SET_PLAYER_SCORE", payload: data.player });
-  }
-  if (data.type === EventType.GET_GAME_INFO) {
-    console.log(data);
-    dispatch({ type: "GET_GAME_INFO", payload: data.game });
   }
 
   console.log("Message reçu : ", data);

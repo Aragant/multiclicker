@@ -6,6 +6,7 @@ export default function BigClick() {
     const websocket = useWebSocket();
     
     function bigClick() {
+        
         const event = {
             type: EventType.CLICK,
         }
