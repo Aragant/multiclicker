@@ -3,4 +3,5 @@ export interface Guild {
     name: string;
     description : string;
     sum_members: number;
+    members: string[];
 }

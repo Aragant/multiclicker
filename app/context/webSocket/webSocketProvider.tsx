@@ -18,7 +18,7 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     const [websocket, setWebSocket] = useState<WebSocket | null>(null);
 
 
-    //pas sur de l interet d un useEffect ici vus que l on est sencer arriver apre sun chanement de page .
+    //pas sur de l interet d un useEffect ici vus que l on est sencer arriver apres un changement de page .
     useEffect(() => {
 
         const playerName = Storage.getPlayerId();

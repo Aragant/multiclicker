@@ -7,10 +7,16 @@ import Storage from "@/app/utils/Storage";
 
 export default function GuildWindow() {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [guildId, setGuildId] = useState<string | null>(null);
 
     const WindowTitle = 'Guild'
 
-    const guildId = Storage.getGuildId();
+    useEffect(() => {
+        const id = Storage.getGuildId();
+        console.log("guildId (client side)", id);
+        setGuildId(id);
+    }, []);
+
 
     const toggleExpansion = () => {
         setIsExpanded((prev) => !prev);

@@ -15,3 +15,18 @@ export async function getGuilds(): Promise<Guild[]> {
         return [];
     }
 }
+
+export async function getGuildById(guildId: string): Promise<Guild | null> {
+    try {
+        const response = await fetch(`http://localhost:9999/guild/${guildId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            }
+        });
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        return null;
+    }
+}
