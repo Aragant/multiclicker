@@ -8,7 +8,8 @@ import { tabToString } from "@/app/utils/tabToString";
 import { use, useEffect, useState } from "react";
 
 
-export default function MyGuild() {
+
+export default function GuildOption() {
   const [guild, setGuild] = useState<Guild | null>(null);
   const [selectedPlayer, setSelectedPlayer] = useState<PublicUser | null>(null);
   const [players, setPlayers] = useState<PublicUser[]>([]);
@@ -75,15 +76,7 @@ export default function MyGuild() {
 
         {/* Informations sur le joueur sélectionné */}
         <div className="w-2/3 p-4">
-          {selectedPlayer ? (
-            <div>
-              <h3 className="text-xl font-bold">{selectedPlayer.username}</h3>
-              <p className="text-gray-700">Rôle : se serais bien de donner les roles{}</p>
-              <p className="text-gray-500 mt-2">Niveau : et des niveaux{}</p>
-            </div>
-          ) : (
-            <p className="text-gray-500">Cliquez sur un joueur pour voir ses informations.</p>
-          )}
+          super option de la super guild
         </div>
       </div>
     </div>

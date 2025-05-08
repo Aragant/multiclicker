@@ -1,3 +1,5 @@
+import { Rethink_Sans } from "next/font/google";
+
 class Storage {
   static playerIdKey = "player_id";
   static guildIdKey = "guild_id";
@@ -13,7 +15,11 @@ class Storage {
 
   static getGuildId(): string | null {
     try {
-      return localStorage.getItem(this.guildIdKey);
+      const guildId = localStorage.getItem(this.guildIdKey);
+      if(guildId === "null") {
+        return null;
+      }
+      return guildId;
     } catch (error) {
       console.error("Failed to get guild ID:", error);
       return null;

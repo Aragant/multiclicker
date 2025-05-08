@@ -30,3 +30,26 @@ export async function getGuildById(guildId: string): Promise<Guild | null> {
         return null;
     }
 }
+
+export async function joinGuild(guildId: string): Promise<Guild | null> {
+    const token = localStorage.getItem("access_token");
+
+    if (!token) {
+        console.error("Token non trouvé");
+        return null;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:9999/guild/join/${guildId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        return null;
+    }
+}

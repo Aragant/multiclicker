@@ -21,6 +21,11 @@ export async function login(username: string, password: string): Promise<LoginRe
 
     const data = await response.json();
     console.log("Login successful:", data);
+
+
+    localStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("refresh_token", data.refresh_token);
+    
     return { success: true, message: "Login successful!" , user: data.user};
   } catch (err) {
     return { success: false, message: "An error occurred while logging in: " + err, user: { guild_id: "", id: "" } };

@@ -1,6 +1,6 @@
 'use client';
 
-import { getGuilds } from "@/app/services/guildService";
+import { getGuilds, joinGuild } from "@/app/services/guildService";
 import { Guild } from "@/app/types/guild";
 import { useState, useEffect } from "react";
 
@@ -40,6 +40,21 @@ export default function GuildFinder() {
 
     const handleSelectGuild = (guild: Guild) => {
         setSelectedGuild(guild);
+    };
+
+    const handleJoinGuild = () => {
+        if (selectedGuild) {
+            console.log(`Rejoindre la guild: ${selectedGuild.id}`);
+            joinGuild(selectedGuild.id)
+                .then((response: any) => {
+                    if (response) {
+                        console.log("Guild joined successfully:", response);
+
+                    } else {
+                        console.error("Failed to join guild");
+                    }
+                })
+        }
     };
 
     return (
@@ -87,7 +102,7 @@ export default function GuildFinder() {
                             <h3 className="text-xl font-bold">{selectedGuild.name}</h3>
                             <p className="text-gray-700">{selectedGuild.description}</p>
                             <p className="text-gray-500 mt-2">Membres : {selectedGuild.sum_members}</p>
-                            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={() => handleJoinGuild()}>
                                 Rejoindre la guild
                             </button>
                         </div>
