@@ -1,7 +1,7 @@
 import { PublicUser } from "../types/user";
 
 
-export async function getUsersByName(usernames: string): Promise<PublicUser[]> {
+export async function getUsersByName(usernames: string): Promise<PublicUser[] | null> {
 
     try {
         const response = await fetch(`http://localhost:9999/user/users?usernames=${usernames}`, {
@@ -17,6 +17,6 @@ export async function getUsersByName(usernames: string): Promise<PublicUser[]> {
         return data;
     } catch (err) {
         console.error(err);
-        return [];
+        return null;
     }
 }

@@ -5,6 +5,7 @@ import GuildFinder from "./guildFinder";
 import MyGuild from "./myGuild";
 import Storage from "@/app/utils/Storage";
 import GuildOption from "./GuildOption";
+import GuildApplicants from "./guildApplicants";
 
 export default function GuildWindow() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -31,6 +32,7 @@ export default function GuildWindow() {
         <GuildFinder key={0} />,
         <MyGuild key={1} />,
         <GuildOption key={2} />,
+        <GuildApplicants key={3} />
     ]
 
 
@@ -58,7 +60,13 @@ export default function GuildWindow() {
                             className={`text-sm cursor-pointer ${indexActiveWindow === 2 ? 'font-bold underline' : 'text-gray-500'}`}
                             onClick={() => setIndexActiveWindow(2)}
                         >
-                            Option de guild
+                            Option
+                        </span>
+                        <span
+                            className={`text-sm cursor-pointer ${indexActiveWindow === 3 ? 'font-bold underline' : 'text-gray-500'}`}
+                            onClick={() => setIndexActiveWindow(3)}
+                        >
+                            postulants
                         </span>
                     </>
                 )}

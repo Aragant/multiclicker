@@ -1,9 +1,9 @@
 'use client';
 
-import { getGuildById } from "@/app/services/guildService";
+import { fetchApplicants, getGuildById } from "@/app/services/guildService";
 import { getUsersByName } from "@/app/services/userService";
 import { Guild } from "@/app/types/guild";
-import { PublicUser } from "@/app/types/user";
+import { Applicants, PublicUser } from "@/app/types/user";
 import { tabToString } from "@/app/utils/tabToString";
 import { use, useEffect, useState } from "react";
 
@@ -11,8 +11,7 @@ import { use, useEffect, useState } from "react";
 
 export default function GuildOption() {
   const [guild, setGuild] = useState<Guild | null>(null);
-  const [selectedPlayer, setSelectedPlayer] = useState<PublicUser | null>(null);
-  const [players, setPlayers] = useState<PublicUser[]>([]);
+  const [selectedPlayer, setSelectedPlayer] = useState<Applicants | null>(null);
 
 
 
@@ -36,47 +35,17 @@ export default function GuildOption() {
 
   }, []);
 
-  useEffect(() => {
-    if (!guild) return;
-    getUsersByName(tabToString(guild.members)).then((players) => {
-      if (players === null) {
-        // afficher une erreur
-        return;
-      }
-      setPlayers(players);
-      console.log("players", players);
-    }).catch((error) => {
-      console.error("Erreur lors de la récupération des joueurs :", error);
-    });
-
-  }, [guild]);
 
   return (
     <div className="flex flex-col  h-full gap-4 p-4">
       {/* Conteneur principal */}
       <div className="flex w-full max-w-4xl h-[280px] overflow-hidden">
-        {/* Liste des joueurs */}
-        <div className="w-1/3 bg-gray-100 overflow-y-auto">
-          {guild && players.length > 0 ? (
-            <ul>
-              {players.map((player) => (
-                <li
-                  key={player.id}
-                  onClick={() => setSelectedPlayer(player)}
-                  className="p-2 cursor-pointer hover:bg-gray-200 border-b border-gray-300"
-                >
-                  {player.username}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="p-2 text-gray-500">Aucun joueur trouvé.</p>
-          )}
-        </div>
+
+       
 
         {/* Informations sur le joueur sélectionné */}
         <div className="w-2/3 p-4">
-          super option de la super guild
+          super option de la super guild : (se serais pas mal de faire des options de guildes)
         </div>
       </div>
     </div>
