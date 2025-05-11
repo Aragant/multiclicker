@@ -1,5 +1,5 @@
 import { Guild } from "../types/guild";
-import { Applicants } from "../types/user";
+import { Applicant } from "../types/user";
 
 export async function getGuilds(): Promise<Guild[]> {
 
@@ -55,7 +55,7 @@ export async function joinGuild(guildId: string): Promise<Guild | null> {
     }
 }
 
-export async function fetchApplicants(): Promise<Applicants[] | null> {
+export async function fetchApplicants(): Promise<Applicant[] | null> {
     const token = localStorage.getItem("access_token");
 
     if (!token) {
@@ -73,13 +73,63 @@ export async function fetchApplicants(): Promise<Applicants[] | null> {
         });
 
         const rawData = await response.json();
-        const data: Applicants[] = rawData.map((item: any) => ({
+        const data: Applicant[] = rawData.map((item: any) => ({
             relationId: item.id,
             userId: item.user_id,
             username: item.username,
         }));
-        
+
         return data;
+    } catch (err) {
+        return null;
+    }
+}
+
+export async function acceptApplicants(applicantId: string): Promise<Applicant[] | null> {
+    const token = localStorage.getItem("access_token");
+
+    if (!token) {
+        console.error("Token non trouvé");
+        return null;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:9999/guild/accept/${applicantId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const rawData = await response.json();
+
+        return rawData;
+    } catch (err) {
+        return null;
+    }
+}
+
+export async function rejectApplicants(applicantId: string): Promise<Applicant[] | null> {
+    const token = localStorage.getItem("access_token");
+
+    if (!token) {
+        console.error("Token non trouvé");
+        return null;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:9999/guild/reject/${applicantId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const rawData = await response.json();
+
+        return rawData;
     } catch (err) {
         return null;
     }

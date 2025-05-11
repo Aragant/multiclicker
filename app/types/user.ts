@@ -4,7 +4,7 @@ export interface PublicUser {
     description : string;
 }
 
-export interface Applicants {
+export interface Applicant {
     relationId: string;
     userId: string;
     username: string;
