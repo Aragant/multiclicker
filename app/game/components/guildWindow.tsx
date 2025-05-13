@@ -60,7 +60,7 @@ export default function GuildWindow() {
       <button
         onClick={togglePanel}
         className={`fixed top-1/2 right-0 transform -translate-y-1/2 z-40 bg-gradient-to-l from-violet-600 to-indigo-600 text-white p-2 rounded-l-lg shadow-lg transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-0"
+          isOpen ? "translate-x-[-500px]" : "translate-x-0"
         }`}
         aria-label={isOpen ? "Close guild panel" : "Open guild panel"}
       >
