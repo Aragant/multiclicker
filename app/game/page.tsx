@@ -1,32 +1,50 @@
 'use client';
 
-import { useState } from "react";
-import BigClick from "../ui/game/BigClick";
-import Player from "../ui/game/player";
-import SumScore from "../ui/game/sumScore";
+import { useEffect, useState } from "react";
+import BigClick from "./components/BigClick";
+import Player from "./components/player";
+import SumScore from "./components/sumScore";
 import GuildWindow from "./components/guildWindow";
 
 
 export default function Clicker() {
-  const [isGuildExpanded, setIsGuildExpanded] = useState(false); // État pour gérer l'ouverture/fermeture
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  const toggleGuild = () => {
-    setIsGuildExpanded((prev) => !prev); // Inverser l'état
-  };
-
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center h-full gap-16 caret-transparent">
-      <div />
-      <div className="flex flex-col items-center gap-6">
-        <SumScore />
-        <BigClick />
+    <div className="flex flex-col items-center justify-center min-h-screen py-16 gap-16 caret-transparent relative overflow-hidden">
+
+      <a
+        className="absolute top-[10px] left-[10px] z-50 px-3 py-1 text-sm bg-white/80 hover:bg-white/90 border rounded-md shadow"
+        href="/loginPage"
+      >
+        Logout
+      </a>
+
+      {/* Background elements */}
+      <div className="absolute top-[-10%] right-[-5%] w-64 h-64 rounded-full bg-violet-500/10 floating-slow"></div>
+      <div className="absolute bottom-[-10%] left-[-5%] w-80 h-80 rounded-full bg-indigo-500/10 floating"></div>
+
+      {/* Game content */}
+      <div className={`stagger-container ${isLoaded ? "animate" : ""}`}>
+        <div className="stagger-item fade-in-up">
+          <SumScore />
+        </div>
+
+        <div className="stagger-item fade-in-up">
+          <BigClick />
+        </div>
+
+        <div className="stagger-item fade-in-up">
+          <Player />
+        </div>
       </div>
-      <div>
-        <Player />
-      </div>
-      {/* div placer en bas a droit de manierre fix  */}
+
+      {/* Guild window */}
       <GuildWindow />
     </div>
-  );
+  )
 }

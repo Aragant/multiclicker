@@ -7,10 +7,17 @@ import Storage from "@/app/utils/Storage";
 import GuildOption from "./GuildOption";
 import GuildApplicants from "./guildApplicants";
 
+import { ChevronLeftIcon, ChevronRightIcon, UsersIcon, SettingsIcon, UserPlusIcon, ShieldIcon } from "../../icons"
+import { cn } from "@/lib/utils";
+
 export default function GuildWindow() {
-    const [isExpanded, setIsExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+    const [activeTab, setActiveTab] = useState<"info" | "options" | "applicants" | "finder">(
+        "finder"
+    )
+    const [isAnimating, setIsAnimating] = useState(false)
+
     const [guildId, setGuildId] = useState<string | null>(null);
-    const [indexActiveWindow, setIndexActiveWindow] = useState(0);
 
 
     const WindowTitle = 'Guild'
@@ -20,68 +27,130 @@ export default function GuildWindow() {
         setGuildId(id);
 
         if (id) {
-            setIndexActiveWindow(1);
+            setActiveTab("info")
         } else {
-            setIndexActiveWindow(0);
+            setActiveTab("finder")
         }
-
     }, []);
 
+     const togglePanel = () => {
+    setIsAnimating(true)
+    setIsOpen((prev) => !prev)
+    setTimeout(() => setIsAnimating(false), 300)
+  }
 
-    const window = [
-        <GuildFinder key={0} />,
-        <MyGuild key={1} />,
-        <GuildOption key={2} />,
-        <GuildApplicants key={3} />
-    ]
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "info":
+        return <MyGuild />
+      case "options":
+        return <GuildOption />
+      case "applicants":
+        return <GuildApplicants />
+      case "finder":
+        return <GuildFinder />
+      default:
+        return <MyGuild />
+    }
+  }
 
+  return (
+    <>
+      {/* Toggle button - always visible */}
+      <button
+        onClick={togglePanel}
+        className={`fixed top-1/2 right-0 transform -translate-y-1/2 z-40 bg-gradient-to-l from-violet-600 to-indigo-600 text-white p-2 rounded-l-lg shadow-lg transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "translate-x-0"
+        }`}
+        aria-label={isOpen ? "Close guild panel" : "Open guild panel"}
+      >
+        {isOpen ? <ChevronRightIcon size={24} /> : <ChevronLeftIcon size={24} />}
+      </button>
 
-    const toggleExpansion = () => {
-        setIsExpanded((prev) => !prev);
-    };
-    return (
-        <div
-            className={`fixed top-4 left-1/2 transform -translate-x-1/2 ${isExpanded ? "w-[500px] h-[400px]" : "w-[200px] h-[50px]"
-                } bg-gray-100 border border-gray-300 shadow-lg rounded-lg transition-all duration-300`}
-        >
-            <div className="flex items-center justify-between p-2 bg-gray-200 rounded-t-lg">
-                <span className="text-sm font-medium text-gray-700">
-                    {WindowTitle}
-                </span>
-                {(isExpanded && indexActiveWindow > 0) && (
-                    <>
-                        <span
-                            className={`text-sm cursor-pointer ${indexActiveWindow === 1 ? 'font-bold underline' : 'text-gray-500'}`}
-                            onClick={() => setIndexActiveWindow(1)}
-                        >
-                            gudil info
-                        </span>
-                        <span
-                            className={`text-sm cursor-pointer ${indexActiveWindow === 2 ? 'font-bold underline' : 'text-gray-500'}`}
-                            onClick={() => setIndexActiveWindow(2)}
-                        >
-                            Option
-                        </span>
-                        <span
-                            className={`text-sm cursor-pointer ${indexActiveWindow === 3 ? 'font-bold underline' : 'text-gray-500'}`}
-                            onClick={() => setIndexActiveWindow(3)}
-                        >
-                            postulants
-                        </span>
-                    </>
-                )}
-                <button
-                    onClick={toggleExpansion}
-                    className="text-sm text-blue-500 hover:underline"
-                >
-                    {isExpanded ? "Minimiser" : "Agrandir"}
-                </button>
-            </div>
+      {/* Main panel */}
+      <div
+        className={cn(
+          "fixed top-0 right-0 h-full bg-white shadow-xl z-30 transition-all duration-300 ease-in-out",
+          isOpen ? "w-[500px]" : "w-0 opacity-0",
+        )}
+      >
+        {/* Panel content */}
+        <div className="h-full flex flex-col">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-violet-500 to-indigo-500 text-white p-4">
+            <h2 className="text-xl font-bold">Guild Panel</h2>
+          </div>
 
-            {/* Contenu de la fenêtre */}
-            {isExpanded && (
-                window[indexActiveWindow]
+          {/* Navigation tabs */}
+          <div className="flex border-b">
+            {guildId ? (
+              <>
+                <TabButton
+                  icon={<UsersIcon size={18} />}
+                  label="My Guild"
+                  active={activeTab === "info"}
+                  onClick={() => setActiveTab("info")}
+                />
+                <TabButton
+                  icon={<SettingsIcon size={18} />}
+                  label="Options"
+                  active={activeTab === "options"}
+                  onClick={() => setActiveTab("options")}
+                />
+                <TabButton
+                  icon={<UserPlusIcon size={18} />}
+                  label="Applicants"
+                  active={activeTab === "applicants"}
+                  onClick={() => setActiveTab("applicants")}
+                />
+              </>
+            ) : (
+              <TabButton
+                icon={<ShieldIcon size={18} />}
+                label="Find Guild"
+                active={activeTab === "finder"}
+                onClick={() => setActiveTab("finder")}
+              />
             )}
+          </div>
+
+          {/* Content area */}
+          <div
+            className={`flex-grow overflow-y-auto p-4 ${isAnimating ? "opacity-50" : "opacity-100"} transition-opacity`}
+          >
+            {renderTabContent()}
+          </div>
         </div>
-    );
+      </div>
+
+      {/* Overlay when panel is open - closes panel when clicked */}
+      {isOpen && <div className="fixed inset-0 bg-black/20 z-20" onClick={togglePanel} aria-hidden="true" />}
+    </>
+  )
+}
+
+function TabButton({
+  icon,
+  label,
+  active,
+  onClick,
+}: {
+  icon: React.ReactNode
+  label: string
+  active: boolean
+  onClick: () => void
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center px-4 py-3 text-sm font-medium transition-colors ${
+        active
+          ? "border-b-2 border-violet-500 text-violet-700"
+          : "text-gray-600 hover:text-violet-600 hover:bg-violet-50"
+      }`}
+    >
+      <span className="mr-2">{icon}</span>
+      {label}
+    </button>
+  )
 }

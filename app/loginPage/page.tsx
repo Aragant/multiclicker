@@ -1,6 +1,7 @@
 "use client";
 
 import Card from "../components/card";
+import Storage from "../utils/Storage";
 import LoginForm from "./components/LoginForm";
 import "./login.css";
 import { useState, useEffect, useRef } from "react"
@@ -8,9 +9,16 @@ import { useState, useEffect, useRef } from "react"
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   
+
+  useEffect(() => {
+    Storage.clear()
+  }, [])
+
   const handleLoginSuccess = () => {
     window.location.href = "/game";
   };
+
+
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">

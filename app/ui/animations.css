@@ -1,0 +1,355 @@
+/* Global Animations CSS */
+
+/* Page transitions */
+.page-transition {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  animation: pageEnter 0.5s forwards;
+}
+
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: pageExit 0.5s forwards;
+}
+
+@keyframes pageExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+}
+
+/* Floating elements */
+.floating {
+  animation: floating 6s ease-in-out infinite alternate;
+}
+
+.floating-slow {
+  animation: floating 8s ease-in-out infinite alternate;
+}
+
+.floating-fast {
+  animation: floating 4s ease-in-out infinite alternate;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+/* Pulse animation */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Fade in animations */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+.fade-in-down {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInDown 0.5s forwards;
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: fadeInLeft 0.5s forwards;
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: fadeInRight 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Staggered animations */
+.stagger-container .stagger-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stagger-container .stagger-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stagger-container .stagger-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stagger-container .stagger-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.stagger-container .stagger-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+/* Button animations */
+.button-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button-hover:active {
+  transform: translateY(1px);
+}
+
+.button-scale {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-scale:hover {
+  transform: scale(1.03);
+}
+
+.button-scale:active {
+  transform: scale(0.97);
+}
+
+/* Card animations */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Glow effect */
+.glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow:hover {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+/* Rotate animation */
+.rotate {
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Shake animation */
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Bounce animation */
+.bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Background gradient animation */
+.bg-gradient-animate {
+  background-size: 200% 200%;
+  animation: gradientBackground 5s ease infinite;
+}
+
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Navbar specific animations */
+.nav-item {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-item:hover {
+  transform: translateY(-3px);
+}
+
+.nav-item::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #6366f1;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.nav-icon {
+  transition: transform 0.3s ease;
+}
+
+.nav-item:hover .nav-icon {
+  transform: scale(1.2);
+}
+
+/* Particle animation */
+.particle-animation {
+  position: absolute;
+  animation: particleFall 1s ease-out forwards;
+  opacity: 0.8;
+}
+
+@keyframes particleFall {
+  0% {
+    transform: translate(-50%, 50%) scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, 150%) scale(1.5);
+    opacity: 0;
+  }
+}
