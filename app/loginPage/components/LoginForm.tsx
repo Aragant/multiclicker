@@ -126,7 +126,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                         <div className="stagger-item">
                             <button
                                 type="submit"
-                                className="w-full h-12 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 transition-all duration-300 button-scale"
+                                className="w-full  h-12 rounded-xl text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 transition-all duration-300 button-scale"
                                 disabled={isLoading}
                             >
                                 {isLoading ? (
