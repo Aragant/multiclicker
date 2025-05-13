@@ -8,17 +8,19 @@ import { useState, useEffect } from "react";
 
 export default function GuildFinder() {
     const [searchTerm, setSearchTerm] = useState("");
-    const [filteredGuilds, setFilteredGuilds] = useState<Guild[]>([]); // Guilds filtrées
-    const [selectedGuild, setSelectedGuild] = useState<Guild | null>(null); // Guild sélectionnée
-    const [loading, setLoading] = useState(true); // État de chargement
-    const [error, setError] = useState<string | null>(null); // État des erreurs
+    const [filteredGuilds, setFilteredGuilds] = useState<Guild[]>([]);
+
+    const [guilds, setGuilds] = useState<Guild[]>([]);
+    const [selectedGuild, setSelectedGuild] = useState<Guild | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         getGuilds()
             .then((guilds) => {
-                console.log(guilds);
+                setGuilds(guilds)
                 setFilteredGuilds(guilds);
-                console.log("filteredGuilds", filteredGuilds);
             })
             .catch((err) => {
                 setError("Failed to fetch guilds");
@@ -30,12 +32,14 @@ export default function GuildFinder() {
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const term = e.target.value.toLowerCase();
+        console.log
+
         setSearchTerm(term);
-        setFilteredGuilds((prevGuilds) =>
-            prevGuilds.filter((guild) =>
+        const filteredGuilds =
+            guilds.filter((guild) =>
                 guild.name.toLowerCase().includes(term)
             )
-        );
+        setFilteredGuilds(filteredGuilds);
     };
 
     const handleSelectGuild = (guild: Guild) => {
@@ -58,59 +62,68 @@ export default function GuildFinder() {
     };
 
     return (
-        <div className="flex flex-col  h-full gap-4 p-4">
-            {/* Barre de recherche */}
+        <div className="flex flex-col h-full gap-4 p-4">
+            {/* Search bar */}
             <div className="w-full max-w-2xl">
                 <input
                     type="text"
-                    placeholder="Rechercher une guild..."
+                    placeholder="Search for a guild..."
                     value={searchTerm}
                     onChange={handleSearch}
-                    className="w-full p-2 border border-gray-300 rounded-lg shadow-sm"
+                    className="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-violet-400 focus:border-transparent transition-all"
                 />
             </div>
 
-            {/* Conteneur principal */}
-            <div className="flex w-full max-w-4xl h-[270px]  overflow-hidden">
-                {/* Liste des guilds trouvées */}
-                <div className="w-1/3 bg-gray-100 overflow-y-auto">
+            {/* Main container */}
+            <div className="flex w-full max-w-4xl h-[100%]  overflow-hidden">
+                {/* Guild list */}
+                <div className="w-1/3 bg-gray-100 overflow-y-auto rounded-l-lg">
                     {loading ? (
-                        <p className="p-2 text-gray-500">Chargement des guilds...</p>
-                    ) : error ? (
-                        <p className="p-2 text-red-500">{error}</p>
+                        <div className="flex items-center justify-center h-full">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500"></div>
+                        </div>
                     ) : filteredGuilds.length > 0 ? (
                         <ul>
                             {filteredGuilds.map((guild) => (
                                 <li
                                     key={guild.id}
                                     onClick={() => handleSelectGuild(guild)}
-                                    className="p-2 cursor-pointer hover:bg-gray-200 border-b border-gray-300"
+                                    className={`p-3 cursor-pointer hover:bg-gray-200 border-b border-gray-300 transition-colors ${selectedGuild?.id === guild.id ? "bg-violet-100" : ""}`}
                                 >
-                                    {guild.name}
+                                    <div className="font-medium">{guild.name}</div>
+                                    <div className="text-xs text-gray-500">Members: EX{guild.sum_members}</div>
                                 </li>
                             ))}
                         </ul>
                     ) : (
-                        <p className="p-2 text-gray-500">Aucune guild trouvée.</p>
+                        <p className="p-4 text-gray-500 text-center">No guilds found.</p>
                     )}
                 </div>
 
-                {/* Informations sur la guild sélectionnée */}
-                <div className="w-2/3 p-4">
+                {/* Guild details */}
+                <div className="w-2/3 p-4 h-[270px] bg-white rounded-r-lg">
                     {selectedGuild ? (
-                        <div>
-                            <h3 className="text-xl font-bold">{selectedGuild.name}</h3>
-                            <p className="text-gray-700">{selectedGuild.description}</p>
-                            <p className="text-gray-500 mt-2">Membres : {selectedGuild.sum_members}</p>
-                            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={() => handleJoinGuild()}>
-                                Rejoindre la guild
+                        <div className="h-full flex flex-col">
+                            <h3 className="text-xl font-bold text-violet-700">{selectedGuild.name}</h3>
+                            <p className="text-gray-700 mt-2 flex-grow">{selectedGuild.description}</p>
+                            <div className="mt-2 mb-4">
+                                <span className="text-sm text-gray-500">Members: EX{selectedGuild.sum_members}</span>
+                                {selectedGuild && (
+                                    <span className="ml-4 text-sm text-gray-500">Level: EX</span>
+                                )}
+                            </div>
+                            <button
+                                className="w-full py-3 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium hover:from-violet-700 hover:to-indigo-700 transition-all duration-300 button-scale"
+                                onClick={handleJoinGuild}
+                            >
+                                Join Guild
                             </button>
                         </div>
                     ) : (
-                        <p className="text-gray-500">Cliquez sur une guild pour voir ses informations.</p>
+                        <div className="flex items-center justify-center h-full text-gray-500">Select a guild to view details</div>
                     )}
                 </div>
             </div>
         </div>
-    );
+    )
 }
