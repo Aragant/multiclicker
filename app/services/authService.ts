@@ -22,7 +22,6 @@ export async function login(username: string, password: string): Promise<LoginRe
     }
 
     const data = await response.json();
-    console.log("Login successful:", data);
 
 
     localStorage.setItem("access_token", data.access_token);

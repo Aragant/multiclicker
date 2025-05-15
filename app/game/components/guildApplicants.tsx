@@ -21,7 +21,6 @@ export default function GuildApplicants() {
                 // afficher une erreur
                 return;
             }
-            console.log("applicants", applicants);
             setApplicants(applicants);
             setLoading(false)
         })
@@ -55,7 +54,6 @@ export default function GuildApplicants() {
                 // afficher une erreur
                 return;
             }
-            console.log("response", response);
             setApplicants((prevApplicants) => prevApplicants.filter((applicant) => applicant.userId !== selectedPlayerInfo.id));
             setSelectedPlayerInfo(null);
         })
@@ -71,7 +69,6 @@ export default function GuildApplicants() {
                 // afficher une erreur
                 return;
             }
-            console.log("response", response);
             setApplicants((prevApplicants) => prevApplicants.filter((applicant) => applicant.userId !== selectedPlayerInfo.id));
             setSelectedPlayerInfo(null);
         })

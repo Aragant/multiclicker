@@ -5,6 +5,7 @@ import { login } from "../../services/authService";
 import { Lock, Mail } from "lucide-react";
 import Spinner from "@/app/components/Spinner";
 import Storage from "@/app/utils/Storage";
+import Link from "next/link";
 
 interface LoginFormProps {
     onSuccess: () => void;
@@ -108,12 +109,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                             </div>
 
                             <div className="text-right">
-                                <a
+                                <Link
                                     href="#"
                                     className="text-sm text-violet-600 hover:text-violet-700 font-medium transition-transform duration-200 inline-block hover:translate-x-1"
                                 >
                                     Mot de passe oublié?
-                                </a>
+                                </Link>
                             </div>
                         </div>
 

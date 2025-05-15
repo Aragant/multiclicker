@@ -3,22 +3,25 @@
 import Card from "../components/card";
 import Storage from "../utils/Storage";
 import LoginForm from "./components/LoginForm";
-import "./login.css";
+// import "./login.css";
 import { useState, useEffect, useRef } from "react"
+
+import { useRouter } from "next/navigation";
+
+
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
-  
+
+  const router = useRouter();
 
   useEffect(() => {
     Storage.clear()
   }, [])
 
   const handleLoginSuccess = () => {
-    window.location.href = "/game";
+    router.push('/game')
   };
-
-
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">

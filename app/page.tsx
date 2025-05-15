@@ -1,18 +1,43 @@
-'use client';
+"use client";
 
-import React, { useEffect } from "react";
+import Card from "./components/card";
+import Storage from "./utils/Storage";
+import LoginForm from "./loginPage/components/LoginForm";
+// import "./login.css";
+import { useState, useEffect, useRef } from "react"
 
-const App = () => {
+import { useRouter } from "next/navigation";
+
+
+
+export default function App() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const router = useRouter();
+
   useEffect(() => {
-    // This code will only run on the client side
-    console.log(document.title);
-  }, []);
+    Storage.clear()
+  }, [])
+
+  const handleLoginSuccess = () => {
+    router.push('/game')
+  };
 
   return (
-    <div>
-      Welcome to oss !
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl font-bold mb-4">Login Page</h1>
+      <Card className="border-none shadow-xl overflow-hidden gnassss">
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-indigo-500/10"
+          style={{
+            background: isLoading
+              ? "linear-gradient(to right, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2))"
+              : "linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1))",
+            transition: "background 0.5s ease",
+          }}
+        />
+        <LoginForm onSuccess={handleLoginSuccess} />
+      </Card>
     </div>
   );
-};
-
-export default App;
+}

@@ -5,6 +5,7 @@ import {
     CubeIcon,
 } from '@heroicons/react/24/outline';
 import './navbar.css';
+import Link from 'next/link';
 
 
 const links = [
@@ -24,13 +25,13 @@ export default function Navbar() {
                 links.map((link) => {
                     const LinkIcon = link.icon;
                     return (
-                        <a
+                        <Link
                             key={link.name}
                             href={link.href}
                         >
                             <LinkIcon className="w-6" />
                             <p >{link.name}</p>
-                        </a>
+                        </Link>
                     );
                 })
             }

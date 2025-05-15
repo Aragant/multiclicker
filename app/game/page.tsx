@@ -5,6 +5,7 @@ import BigClick from "./components/BigClick";
 import Player from "./components/player";
 import SumScore from "./components/sumScore";
 import GuildWindow from "./components/guildWindow";
+import Link from "next/link";
 
 
 export default function Clicker() {
@@ -17,12 +18,12 @@ export default function Clicker() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-16 gap-16 caret-transparent relative overflow-hidden">
 
-      <a
+      <Link
         className="absolute top-[10px] left-[10px] z-50 px-3 py-1 text-sm bg-white/80 hover:bg-white/90 border rounded-md shadow"
         href="/loginPage"
       >
         Logout
-      </a>
+      </Link>
 
       {/* Background elements */}
       <div className="absolute top-[-10%] right-[-5%] w-64 h-64 rounded-full bg-violet-500/10 floating-slow"></div>

@@ -45,7 +45,6 @@ export default function MyGuild() {
         return;
       }
       setPlayers(players);
-      console.log("players", players);
     }).catch((error) => {
       console.error("Erreur lors de la récupération des joueurs :", error);
     });

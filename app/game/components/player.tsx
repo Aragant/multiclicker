@@ -9,11 +9,9 @@ export default function Player() {
 
     useEffect(() => {
         setAnimate(true)
-        console.log("players", players)
     }, [])
 
     useEffect(() => {
-        console.log("players", players)
     }, [players])
 
     return (

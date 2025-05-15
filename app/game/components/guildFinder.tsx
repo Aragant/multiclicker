@@ -32,7 +32,6 @@ export default function GuildFinder() {
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const term = e.target.value.toLowerCase();
-        console.log
 
         setSearchTerm(term);
         const filteredGuilds =
@@ -48,11 +47,9 @@ export default function GuildFinder() {
 
     const handleJoinGuild = () => {
         if (selectedGuild) {
-            console.log(`Rejoindre la guild: ${selectedGuild.id}`);
             joinGuild(selectedGuild.id)
                 .then((response: any) => {
                     if (response) {
-                        console.log("Guild joined successfully:", response);
 
                     } else {
                         console.error("Failed to join guild");
