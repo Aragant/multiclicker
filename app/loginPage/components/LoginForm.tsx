@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { login } from "../../services/authService";
 import { Lock, Mail } from "lucide-react";
-import Spinner from "@/app/components/Spinner";
 import Storage from "@/app/utils/Storage";
 import Link from "next/link";
 
@@ -132,7 +131,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                             >
                                 {isLoading ? (
                                     <div className="spinner">
-                                        <Spinner />
+                                        <div className="flex items-center justify-center h-full">
+                                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500"></div>
+                                        </div>
                                     </div>
                                 ) : (
                                     "Se connecter"
