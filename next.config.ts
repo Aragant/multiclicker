@@ -10,6 +10,8 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'export',
+  basePath: '/multiclicker',
+  assetPrefix: '/multiclicker/',
 }
 
 module.exports = nextConfig
