@@ -12,13 +12,13 @@ interface WebSocketProviderProps {
     children: React.ReactNode;
 }
 
+const wsUrl = process.env.NEXT_PUBLIC_WS_URL;
+
 export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     const [state, dispatch] = useReducer(multiclickerReducer, initialState);
 
     const [websocket, setWebSocket] = useState<WebSocket | null>(null);
 
-
-    //pas sur de l interet d un useEffect ici vus que l on est sencer arriver apres un changement de page .
     useEffect(() => {
 
         const playerName = Storage.getPlayerId();
@@ -30,10 +30,9 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
             return;
         }
 
-        const webSocket = new WebSocket('ws://localhost:8001');
+        const webSocket = new WebSocket(`${wsUrl}/ws`);
         setWebSocket(webSocket);
 
-        //do connection to gamer name  we can send an key to the server to identify the player later
         webSocket.onopen = () => {
             console.log("WebSocket connected");
             const loginEvent = {

@@ -10,7 +10,6 @@ import { use, useEffect, useState } from "react";
 
 
 export default function GuildApplicants() {
-    const [selectedPlayer, setSelectedPlayer] = useState<Applicant | null>(null);
     const [applicants, setApplicants] = useState<Applicant[]>([]);
     const [selectedPlayerInfo, setSelectedPlayerInfo] = useState<PublicUser | null>(null);
     const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null)
@@ -31,8 +30,8 @@ export default function GuildApplicants() {
 
 
     useEffect(() => {
-        if (selectedPlayer) {
-            getUsersByName(selectedPlayer.username).then((userData) => {
+        if (selectedApplicant) {
+            getUsersByName(selectedApplicant.username).then((userData) => {
                 if (userData === null) {
                     // afficher une erreur
                     return;
@@ -43,7 +42,7 @@ export default function GuildApplicants() {
                 console.error("Erreur lors de la récupération de l'utilisateur :", error);
             });
         }
-    }, [selectedPlayer]);
+    }, [selectedApplicant]);
 
 
     function handleReject() {

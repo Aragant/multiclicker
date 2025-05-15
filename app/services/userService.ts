@@ -1,10 +1,11 @@
 import { PublicUser } from "../types/user";
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getUsersByName(usernames: string): Promise<PublicUser[] | null> {
 
     try {
-        const response = await fetch(`http://localhost:9999/user/users?usernames=${usernames}`, {
+        const response = await fetch(`${apiUrl}/user/users?usernames=${usernames}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",

@@ -32,6 +32,7 @@ export default function MyGuild() {
       setLoading(false)
     }).catch((error) => {
       console.error("Erreur lors de la récupération de la guilde :", error);
+      setLoading(false)
     });
 
   }, []);

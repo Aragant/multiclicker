@@ -1,10 +1,12 @@
 import { Guild } from "../types/guild";
 import { Applicant } from "../types/user";
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export async function getGuilds(): Promise<Guild[]> {
 
     try {
-        const response = await fetch("http://localhost:9999/guild", {
+        const response = await fetch(`${apiUrl}/guild`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -19,7 +21,7 @@ export async function getGuilds(): Promise<Guild[]> {
 
 export async function getGuildById(guildId: string): Promise<Guild | null> {
     try {
-        const response = await fetch(`http://localhost:9999/guild/${guildId}`, {
+        const response = await fetch(`${apiUrl}/guild/${guildId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -41,7 +43,7 @@ export async function joinGuild(guildId: string): Promise<Guild | null> {
     }
 
     try {
-        const response = await fetch(`http://localhost:9999/guild/join/${guildId}`, {
+        const response = await fetch(`${apiUrl}/guild/join/${guildId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -64,7 +66,7 @@ export async function fetchApplicants(): Promise<Applicant[] | null> {
     }
 
     try {
-        const response = await fetch(`http://localhost:9999/guild/applicants`, {
+        const response = await fetch(`${apiUrl}/guild/applicants`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -94,7 +96,7 @@ export async function acceptApplicants(applicantId: string): Promise<Applicant[]
     }
 
     try {
-        const response = await fetch(`http://localhost:9999/guild/accept/${applicantId}`, {
+        const response = await fetch(`${apiUrl}/guild/accept/${applicantId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -119,7 +121,7 @@ export async function rejectApplicants(applicantId: string): Promise<Applicant[]
     }
 
     try {
-        const response = await fetch(`http://localhost:9999/guild/reject/${applicantId}`, {
+        const response = await fetch(`${apiUrl}/guild/reject/${applicantId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

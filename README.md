@@ -4,6 +4,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
+add 
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:9999
+WS_API_URL=ws://localhost:9999
+```
+in .env.local
+
 ```bash
 npm run dev
 # or
