@@ -5,7 +5,7 @@ import { useHandleWebSocketEvent } from "./useHandleWebSocketEvent";
 import { multiclickerReducer, initialState } from "@/app/context/multiclicker/multiclickerReducer";
 import { WebSocketContext } from "./webSocketConstext";
 import Storage from "@/app/utils/Storage";
-
+import { usePathname } from "next/navigation";
 
 
 interface WebSocketProviderProps {
@@ -18,7 +18,7 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     const [state, dispatch] = useReducer(multiclickerReducer, initialState);
 
     const [websocket, setWebSocket] = useState<WebSocket | null>(null);
-
+    const pathname = usePathname();
     useEffect(() => {
 
         const playerName = Storage.getPlayerId();
@@ -30,7 +30,7 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
             return;
         }
 
-        const webSocket = new WebSocket(`${wsUrl}/ws`);
+        const webSocket = new WebSocket(`${wsUrl}`);
         setWebSocket(webSocket);
 
         webSocket.onopen = () => {
@@ -57,7 +57,7 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
             }
         };
 
-    }, []);
+    }, [pathname]);
 
     useHandleWebSocketEvent(websocket, dispatch);
 

@@ -1,5 +1,6 @@
 import { EventType } from "@/app/context/eventType";
 import { useWebSocket } from "@/app/context/useWebSocket";
+import Storage from "@/app/utils/Storage";
 import { useState } from "react";
 
 
@@ -10,7 +11,8 @@ export default function BigClick() {
     const [particleId, setParticleId] = useState(0)
 
     function handleClick() {
-
+        console.log(websocket)
+        console.log(Storage.getPlayerId())
         const event = {
             type: EventType.CLICK,
         }
