@@ -16,7 +16,7 @@ export default function Clicker() {
   }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-16 gap-16 caret-transparent relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center h-[calc(100%-76px)] py-16 gap-16 caret-transparent relative overflow-hidden">
 
       <Link
         className="absolute top-[10px] left-[10px] z-50 px-3 py-1 text-sm bg-white/80 hover:bg-white/90 border rounded-md shadow"
