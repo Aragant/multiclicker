@@ -69,10 +69,10 @@ export default function GuildWindow() {
 
       {/* Main panel */}
       <div
-        className={cn(
-          "fixed top-0 right-0 h-full bg-white shadow-xl z-30 transition-all duration-300 ease-in-out",
-          isOpen ? "w-full max-w-[500px]" : "w-0 opacity-0",
-        )}
+        className={
+          `fixed top-0 right-0 h-full bg-white shadow-xl z-30 transition-all duration-300 ease-in-out",
+           ${isOpen ? "max-w-[500px] w-full" : "max-w-0 w-0 opacity-0"}
+        `}
       >
         {/* Panel content */}
         <div className="h-full flex flex-col">
