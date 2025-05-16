@@ -12,28 +12,28 @@ import { cn } from "@/lib/utils";
 
 export default function GuildWindow() {
   const [isOpen, setIsOpen] = useState(false)
-    const [activeTab, setActiveTab] = useState<"info" | "options" | "applicants" | "finder">(
-        "finder"
-    )
-    const [isAnimating, setIsAnimating] = useState(false)
+  const [activeTab, setActiveTab] = useState<"info" | "options" | "applicants" | "finder">(
+    "finder"
+  )
+  const [isAnimating, setIsAnimating] = useState(false)
 
-    const [guildId, setGuildId] = useState<string | null>(null);
+  const [guildId, setGuildId] = useState<string | null>(null);
 
 
-    const WindowTitle = 'Guild'
+  const WindowTitle = 'Guild'
 
-    useEffect(() => {
-        const id = Storage.getGuildId();
-        setGuildId(id);
+  useEffect(() => {
+    const id = Storage.getGuildId();
+    setGuildId(id);
 
-        if (id) {
-            setActiveTab("info")
-        } else {
-            setActiveTab("finder")
-        }
-    }, []);
+    if (id) {
+      setActiveTab("info")
+    } else {
+      setActiveTab("finder")
+    }
+  }, []);
 
-     const togglePanel = () => {
+  const togglePanel = () => {
     setIsAnimating(true)
     setIsOpen((prev) => !prev)
     setTimeout(() => setIsAnimating(false), 300)
@@ -59,9 +59,9 @@ export default function GuildWindow() {
       {/* Toggle button - always visible */}
       <button
         onClick={togglePanel}
-        className={`fixed top-1/2 right-0 transform -translate-y-1/2 z-40 bg-gradient-to-l from-violet-600 to-indigo-600 text-white p-2 rounded-l-lg shadow-lg transition-transform duration-300 ${
-          isOpen ? "translate-x-[-500px]" : "translate-x-0"
-        }`}
+        className={`fixed top-1/2 z-40 transform -translate-y-1/2 bg-gradient-to-l from-violet-600 to-indigo-600 text-white p-2 rounded-l-lg shadow-lg transition-all duration-300 
+          ${isOpen ? "right-[calc(min((100vw-40px),500px))]" : "right-0"}
+          `}
         aria-label={isOpen ? "Close guild panel" : "Open guild panel"}
       >
         {isOpen ? <ChevronRightIcon size={24} /> : <ChevronLeftIcon size={24} />}
@@ -71,7 +71,7 @@ export default function GuildWindow() {
       <div
         className={cn(
           "fixed top-0 right-0 h-full bg-white shadow-xl z-30 transition-all duration-300 ease-in-out",
-          isOpen ? "w-[500px]" : "w-0 opacity-0",
+          isOpen ? "w-full max-w-[500px]" : "w-0 opacity-0",
         )}
       >
         {/* Panel content */}
@@ -143,11 +143,10 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center px-4 py-3 text-sm font-medium transition-colors ${
-        active
-          ? "border-b-2 border-violet-500 text-violet-700"
-          : "text-gray-600 hover:text-violet-600 hover:bg-violet-50"
-      }`}
+      className={`flex items-center px-4 py-3 text-sm font-medium transition-colors ${active
+        ? "border-b-2 border-violet-500 text-violet-700"
+        : "text-gray-600 hover:text-violet-600 hover:bg-violet-50"
+        }`}
     >
       <span className="mr-2">{icon}</span>
       {label}
