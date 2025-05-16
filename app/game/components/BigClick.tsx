@@ -42,7 +42,7 @@ export default function BigClick() {
     }
 
     return (
-        <div className="relative">
+        <div className="relative  flex  justify-center  ">
             {/* Particles */}
             {particles.map((particle) => (
                 <div
