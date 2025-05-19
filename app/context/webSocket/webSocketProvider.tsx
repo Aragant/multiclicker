@@ -21,8 +21,14 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     const pathname = usePathname();
     useEffect(() => {
 
-        const playerName = Storage.getPlayerId();
-        if (!playerName) {
+        const playerId = Storage.getPlayerId();
+        const clanId = Storage.getGuildId();
+        if (!playerId || !clanId) {
+            console.log("connect to clanId");
+            return;
+        }
+
+        if (!playerId) {
             if (websocket) {
                 websocket.close();
                 setWebSocket(null);
@@ -32,12 +38,12 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
 
         const webSocket = new WebSocket(`${wsUrl}`);
         setWebSocket(webSocket);
-
+// ajouter un jwttoken dans le header pour securiser la connexion
         webSocket.onopen = () => {
             console.log("WebSocket connected");
             const loginEvent = {
                 type: "login",
-                username: playerName,
+                playerId: playerId,
             };
             webSocket.send(JSON.stringify(loginEvent));
         };

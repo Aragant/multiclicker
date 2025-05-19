@@ -27,7 +27,7 @@ export default function Player() {
                         >
                             <span className="font-medium text-gray-800">{player.username}</span>
                             <span className="bg-violet-100 text-violet-800 px-2 py-1 rounded-full text-sm font-bold">
-                                {player.sumScore}
+                                {player.score}
                             </span>
                         </li>
                     )

@@ -20,12 +20,19 @@ export const useHandleWebSocketEvent = (
   }, [websocket, dispatch]);
 };
 
-const handleMessage = (
+const handleMessage = async (
   event: MessageEvent,
   dispatch: React.Dispatch<MulticlickerAction>
 ) => {
-  const data = JSON.parse(event.data);
+  console.log("Message reçu : ", event);
+  const data = await JSON.parse(event.data);
 
+
+  // console.log(" ???  ", EventType.CLICKED === data.type);
+  console.log(" ???  ", data);
+  console.log(" ???  ", data.type);
+
+  console.log(" ???  ", data.sumScore);
   switch (data.type) {
     case EventType.CLICKED:
       dispatch({ type: "SET_SUM_SCORE", payload: data.sumScore });

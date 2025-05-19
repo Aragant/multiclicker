@@ -2,7 +2,7 @@
 
 type PlayerScore = {
     username: string;
-    sumScore: number;
+    score: number;
 }
 
 
@@ -28,11 +28,13 @@ export const initialState: MulticlickerState = {
 export const multiclickerReducer = (state: MulticlickerState, action: MulticlickerAction): MulticlickerState => {
     switch (action.type) {
         case 'SET_SUM_SCORE':
+            console.log("SET_SUM_SCORE", action.payload);
             return {
                 ...state,
                 sumScore: action.payload,
             };
         case 'SET_PLAYER_SCORE':
+            console.log("SET_PLAYER_SCORE", action.payload);
             setPlayerScore(action.payload, state);
             return {
                 ...state,
@@ -59,7 +61,7 @@ function setPlayerScore(playerScore: PlayerScore, state: MulticlickerState) {
     if (index === -1) {
         state.playerScore.push(playerScore);
     } else {
-        state.playerScore[index].sumScore = playerScore.sumScore;
+        state.playerScore[index].score = playerScore.score;
     }
 }
 
